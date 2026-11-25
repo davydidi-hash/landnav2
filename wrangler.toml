@@ -1,0 +1,15 @@
+name = "land-navigator"
+main = "worker/index.js"
+compatibility_date = "2026-11-01"
+
+[assets]
+directory = "./docs"
+
+[vars]
+ALLOWED_ORIGIN = "https://davydidi-hash.github.io"   # origin only, no path, no trailing slash
+APP_URL = "https://davydidi-hash.github.io/landnav/"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "landnav"
+database_id = "11b4d145-9f02-412d-9846-c93d6d121105"

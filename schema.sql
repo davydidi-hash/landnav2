@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS cases(
+  ref TEXT PRIMARY KEY,
+  status TEXT NOT NULL,
+  type TEXT,
+  district TEXT,
+  threat INTEGER DEFAULT 0,
+  created TEXT,
+  data TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_cases_created ON cases(created);
+
+CREATE TABLE IF NOT EXISTS officers(username TEXT PRIMARY KEY, name TEXT NOT NULL, role TEXT NOT NULL, salt TEXT NOT NULL, hash TEXT NOT NULL, active INTEGER DEFAULT 1);
+CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY, username TEXT NOT NULL, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, t TEXT, who TEXT, action TEXT, ref TEXT);
+
+CREATE TABLE IF NOT EXISTS history(id INTEGER PRIMARY KEY AUTOINCREMENT, ref TEXT NOT NULL, t TEXT NOT NULL, by_user TEXT, by_name TEXT, level TEXT, status TEXT, notes TEXT, resolution TEXT, challenges TEXT, photos TEXT);
+CREATE INDEX IF NOT EXISTS idx_history_ref ON history(ref);
+CREATE TABLE IF NOT EXISTS attendance(id INTEGER PRIMARY KEY AUTOINCREMENT, hist_id INTEGER, ref TEXT NOT NULL, name TEXT, verified INTEGER DEFAULT 0);
+CREATE INDEX IF NOT EXISTS idx_attendance_ref ON attendance(ref);
